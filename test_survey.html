@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI使用情况调查问卷</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 5px 0;
+        }
+        .form-actions {
+            margin-top: 30px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #27ae60;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .personal-info {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 5px;
+        }
+        .personal-info .info-item {
+            margin-bottom: 15px;
+        }
+        .personal-info label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI使用情况调查问卷</h1>
+        
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+        </div>
+        
+        <div class="personal-info">
+            <div class="info-item">
+                <label for="name">姓名：</label>
+                <input type="text" id="name" placeholder="请输入您的姓名">
+            </div>
+            <div class="info-item">
+                <label for="studentId">学号：</label>
+                <input type="text" id="studentId" placeholder="请输入您的学号">
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>1. 您是否听说过AI大模型（如ChatGPT、文心一言等）？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q1" value="是"> 是</div>
+                <div class="option"><input type="radio" name="q1" value="否"> 否</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>2. 您是否使用过AI大模型工具？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q2" value="经常使用"> 经常使用（每周多次）</div>
+                <div class="option"><input type="radio" name="q2" value="偶尔使用"> 偶尔使用（每周1-2次）</div>
+                <div class="option"><input type="radio" name="q2" value="很少使用"> 很少使用（每月几次）</div>
+                <div class="option"><input type="radio" name="q2" value="从未使用"> 从未使用</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>3. 您主要使用哪些AI大模型？（可多选，请选择所有适用的选项）</p>
+            <div class="options">
+                <div class="option"><input type="checkbox" name="q3" value="ChatGPT"> ChatGPT</div>
+                <div class="option"><input type="checkbox" name="q3" value="文心一言"> 文心一言</div>
+                <div class="option"><input type="checkbox" name="q3" value="讯飞星火"> 讯飞星火</div>
+                <div class="option"><input type="checkbox" name="q3" value="通义千问"> 通义千问</div>
+                <div class="option"><input type="checkbox" name="q3" value="豆包"> 豆包</div>
+                <div class="option"><input type="checkbox" name="q3" value="Claude"> Claude</div>
+                <div class="option"><input type="checkbox" name="q3" value="其他"> 其他</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>4. 您主要在哪些场景使用AI大模型？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q4" value="学习辅助"> 学习辅助（做作业、解答问题等）</div>
+                <div class="option"><input type="radio" name="q4" value="内容创作"> 内容创作（写文章、制作PPT等）</div>
+                <div class="option"><input type="radio" name="q4" value="代码编程"> 代码编程和开发</div>
+                <div class="option"><input type="radio" name="q4" value="日常交流"> 日常交流和信息获取</div>
+                <div class="option"><input type="radio" name="q4" value="创意生成"> 创意生成（头脑风暴、灵感激发）</div>
+                <div class="option"><input type="radio" name="q4" value="其他"> 其他</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>5. 您平均每次使用AI大模型的时长？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q5" value="10分钟以内"> 10分钟以内</div>
+                <div class="option"><input type="radio" name="q5" value="10-30分钟"> 10-30分钟</div>
+                <div class="option"><input type="radio" name="q5" value="30-60分钟"> 30-60分钟</div>
+                <div class="option"><input type="radio" name="q5" value="1小时以上"> 1小时以上</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>6. 您使用AI大模型的主要目的是什么？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q6" value="提高学习效率"> 提高学习效率</div>
+                <div class="option"><input type="radio" name="q6" value="解决具体问题"> 解决具体问题</div>
+                <div class="option"><input type="radio" name="q6" value="获取信息"> 获取信息和知识</div>
+                <div class="option"><input type="radio" name="q6" value="辅助创作"> 辅助创作和设计</div>
+                <div class="option"><input type="radio" name="q6" value="娱乐休闲"> 娱乐休闲</div>
+                <div class="option"><input type="radio" name="q6" value="其他"> 其他</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>7. 您对AI大模型功能的熟练程度？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q7" value="非常熟练"> 非常熟练（能充分利用各种功能）</div>
+                <div class="option"><input type="radio" name="q7" value="比较熟练"> 比较熟练（基本功能运用自如）</div>
+                <div class="option"><input type="radio" name="q7" value="一般"> 一般（了解基本操作）</div>
+                <div class="option"><input type="radio" name="q7" value="不太熟练"> 不太熟练（需要指导）</div>
+                <div class="option"><input type="radio" name="q7" value="完全不熟练"> 完全不熟练</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>8. 您认为AI大模型对您的帮助程度如何？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q8" value="极大帮助"> 极大帮助</div>
+                <div class="option"><input type="radio" name="q8" value="较大帮助"> 较大帮助</div>
+                <div class="option"><input type="radio" name="q8" value="一般帮助"> 一般帮助</div>
+                <div class="option"><input type="radio" name="q8" value="帮助不大"> 帮助不大</div>
+                <div class="option"><input type="radio" name="q8" value="没有帮助"> 没有帮助</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>9. 您在使用AI大模型时，最常用的提示词类型是？</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q9" value="简单提问"> 简单提问</div>
+                <div class="option"><input type="radio" name="q9" value="详细指令"> 详细指令（说明具体需求）</div>
+                <div class="option"><input type="radio" name="q9" value="角色扮演"> 角色扮演（要求AI扮演特定角色）</div>
+                <div class="option"><input type="radio" name="q9" value="多轮对话"> 多轮对话（持续深入交流）</div>
+                <div class="option"><input type="radio" name="q9" value="格式化输出"> 要求格式化输出（表格、代码等）</div>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>10. 您认为使用AI大模型最大的挑战或困难是什么？</p>
+            <textarea id="q10" placeholder="请输入您的想法..."></textarea>
+        </div>
+        
+        <div class="form-actions">
+            <button id="submitBtn" disabled>提交问卷</button>
+            <button id="exportBtn">导出数据</button>
+            <button id="statisticsBtn">查看统计</button>
+        </div>
+    </div>
+    
+    <!-- 统计结果弹窗 -->
+    <div id="statisticsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background-color: white; padding: 30px; border-radius: 8px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto;">
+            <h2 style="text-align: center; margin-top: 0;">统计结果</h2>
+            <div id="statisticsContent"></div>
+            <button id="closeModal" style="display: block; margin: 20px auto 0;">关闭</button>
+        </div>
+    </div>
+    
+    <script>
+        // 检查表单是否完成
+        function checkFormComplete() {
+            const name = document.getElementById('name').value.trim();
+            const studentId = document.getElementById('studentId').value.trim();
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelectorAll('input[name="q3"]:checked').length > 0;
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            const q6 = document.querySelector('input[name="q6"]:checked');
+            const q7 = document.querySelector('input[name="q7"]:checked');
+            const q8 = document.querySelector('input[name="q8"]:checked');
+            const q9 = document.querySelector('input[name="q9"]:checked');
+            const q10 = document.getElementById('q10').value.trim();
+            
+            const isComplete = name && studentId && q1 && q2 && q3 && q4 && q5 && q6 && q7 && q8 && q9 && q10;
+            document.getElementById('submitBtn').disabled = !isComplete;
+        }
+        
+        // 更新进度条
+        function updateProgressBar() {
+            let completed = 0;
+            const total = 12; // 姓名、学号、q1-q10
+            
+            if (document.getElementById('name').value.trim()) completed++;
+            if (document.getElementById('studentId').value.trim()) completed++;
+            if (document.querySelector('input[name="q1"]:checked')) completed++;
+            if (document.querySelector('input[name="q2"]:checked')) completed++;
+            if (document.querySelectorAll('input[name="q3"]:checked').length > 0) completed++;
+            if (document.querySelector('input[name="q4"]:checked')) completed++;
+            if (document.querySelector('input[name="q5"]:checked')) completed++;
+            if (document.querySelector('input[name="q6"]:checked')) completed++;
+            if (document.querySelector('input[name="q7"]:checked')) completed++;
+            if (document.querySelector('input[name="q8"]:checked')) completed++;
+            if (document.querySelector('input[name="q9"]:checked')) completed++;
+            if (document.getElementById('q10').value.trim()) completed++;
+            
+            const percentage = (completed / total) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+        
+        // 提交问卷
+        function submitSurvey() {
+            // 获取q3的多选值
+            const q3Values = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
+                .map(checkbox => checkbox.value)
+                .join(', ');
+                
+            const submission = {
+                timestamp: new Date().toLocaleString(),
+                name: document.getElementById('name').value.trim(),
+                studentId: document.getElementById('studentId').value.trim(),
+                answers: {
+                    q1: document.querySelector('input[name="q1"]:checked')?.value || '',
+                    q2: document.querySelector('input[name="q2"]:checked')?.value || '',
+                    q3: q3Values,
+                    q4: document.querySelector('input[name="q4"]:checked')?.value || '',
+                    q5: document.querySelector('input[name="q5"]:checked')?.value || '',
+                    q6: document.querySelector('input[name="q6"]:checked')?.value || '',
+                    q7: document.querySelector('input[name="q7"]:checked')?.value || '',
+                    q8: document.querySelector('input[name="q8"]:checked')?.value || '',
+                    q9: document.querySelector('input[name="q9"]:checked')?.value || '',
+                    q10: document.getElementById('q10').value.trim()
+                }
+            };
+            
+            // 从localStorage获取现有提交数据
+            let submissions = JSON.parse(localStorage.getItem('surveySubmissions') || '[]');
+            submissions.push(submission);
+            localStorage.setItem('surveySubmissions', JSON.stringify(submissions));
+            
+            alert('问卷提交成功！');
+            resetForm();
+        }
+        
+        function resetForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('studentId').value = '';
+            document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                radio.checked = false;
+            });
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('q10').value = '';
+            updateProgressBar();
+            checkFormComplete();
+        }
+        
+        // 导出所有用户数据
+        function exportToExcel() {
+            const submissions = JSON.parse(localStorage.getItem('surveySubmissions') || '[]');
+            
+            if (submissions.length === 0) {
+                alert('没有找到用户提交的数据！');
+                return;
+            }
+            
+            // 创建CSV内容
+            let csvContent = '提交时间,姓名,学号,问题1_是否听说过AI大模型,问题2_使用频率,问题3_使用的AI模型,问题4_使用场景,问题5_使用时长,问题6_使用目的,问题7_熟练程度,问题8_帮助程度,问题9_提示词类型,问题10_最大挑战\n';
+            
+            submissions.forEach(submission => {
+                const row = [
+                    submission.timestamp,
+                    submission.name,
+                    submission.studentId,
+                    submission.answers.q1 || '',
+                    submission.answers.q2 || '',
+                    submission.answers.q3 || '',
+                    submission.answers.q4 || '',
+                    submission.answers.q5 || '',
+                    submission.answers.q6 || '',
+                    submission.answers.q7 || '',
+                    submission.answers.q8 || '',
+                    submission.answers.q9 || '',
+                    submission.answers.q10 || ''
+                ];
+                csvContent += row.map(cell => `"${cell}"`).join(',') + '\n';
+            });
+            
+            // 创建下载链接
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `AI调查问卷_所有用户数据_${new Date().toLocaleDateString()}.csv`);
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            alert('数据导出成功！');
+        }
+        
+        // 生成统计结果
+        function generateStatistics() {
+            const submissions = JSON.parse(localStorage.getItem('surveySubmissions') || '[]');
+            
+            if (submissions.length === 0) {
+                return '<p style="text-align: center;">暂无数据</p>';
+            }
+            
+            let statisticsHTML = `<h3>提交记录总数：${submissions.length}</h3>`;
+            
+            // 统计问题1
+            const q1Stats = {};
+            submissions.forEach(sub => {
+                const answer = sub.answers.q1;
+                q1Stats[answer] = (q1Stats[answer] || 0) + 1;
+            });
+            
+            statisticsHTML += `
+                <div style="margin-top: 20px;">
+                    <h4>问题1：您是否听说过AI大模型？</h4>
+                    ${Object.entries(q1Stats).map(([key, value]) => 
+                        `<p>${key}: ${value} (${(value/submissions.length*100).toFixed(1)}%)</p>`
+                    ).join('')}
+                </div>
+            `;
+            
+            // 统计问题2
+            const q2Stats = {};
+            submissions.forEach(sub => {
+                const answer = sub.answers.q2;
+                q2Stats[answer] = (q2Stats[answer] || 0) + 1;
+            });
+            
+            statisticsHTML += `
+                <div style="margin-top: 20px;">
+                    <h4>问题2：您使用AI大模型的频率？</h4>
+                    ${Object.entries(q2Stats).map(([key, value]) => 
+                        `<p>${key}: ${value} (${(value/submissions.length*100).toFixed(1)}%)</p>`
+                    ).join('')}
+                </div>
+            `;
+            
+            // 统计问题3（多选）
+            const q3Stats = {};
+            submissions.forEach(sub => {
+                const answers = sub.answers.q3 ? sub.answers.q3.split(', ') : [];
+                answers.forEach(answer => {
+                    q3Stats[answer] = (q3Stats[answer] || 0) + 1;
+                });
+            });
+            
+            statisticsHTML += `
+                <div style="margin-top: 20px;">
+                    <h4>问题3：主要使用的AI大模型？</h4>
+                    ${Object.entries(q3Stats).map(([key, value]) => 
+                        `<p>${key}: ${value} (${(value/submissions.length*100).toFixed(1)}%)</p>`
+                    ).join('')}
+                </div>
+            `;
+            
+            // 统计问题4-9
+            const questionTitles = {
+                q4: '问题4：主要使用场景？',
+                q5: '问题5：平均使用时长？',
+                q6: '问题6：使用的主要目的？',
+                q7: '问题7：对功能的熟练程度？',
+                q8: '问题8：对您的帮助程度？',
+                q9: '问题9：最常用的提示词类型？'
+            };
+            
+            Object.entries(questionTitles).forEach(([questionId, title]) => {
+                const stats = {};
+                submissions.forEach(sub => {
+                    const answer = sub.answers[questionId];
+                    if (answer) {
+                        stats[answer] = (stats[answer] || 0) + 1;
+                    }
+                });
+                
+                statisticsHTML += `
+                    <div style="margin-top: 20px;">
+                        <h4>${title}</h4>
+                        ${Object.entries(stats).map(([key, value]) => 
+                            `<p>${key}: ${value} (${(value/submissions.length*100).toFixed(1)}%)</p>`
+                        ).join('')}
+                    </div>
+                `;
+            });
+            
+            // 统计问题10（开放问题）
+            const q10Answers = submissions.map(sub => sub.answers.q10 || '未回答')
+                                         .filter(answer => answer && answer !== '未回答');
+            
+            statisticsHTML += `
+                <div style="margin-top: 20px;">
+                    <h4>问题10：最大的挑战或困难？</h4>
+                    ${q10Answers.length > 0 ? 
+                        `<ul style="list-style-type: none; padding-left: 0;">
+                            ${q10Answers.map((answer, index) => 
+                                `<li style="margin-bottom: 10px; padding: 10px; background: #f9f9f9; border-radius: 5px;">${index + 1}. ${answer}</li>`
+                            ).join('')}
+                        </ul>` : 
+                        '<p style="text-align: center; color: #95a5a6;">暂无回答</p>'
+                    }
+                </div>
+            `;
+            
+            return statisticsHTML;
+        }
+        
+        // 显示统计结果
+        function showStatistics() {
+            document.getElementById('statisticsContent').innerHTML = generateStatistics();
+            document.getElementById('statisticsModal').style.display = 'flex';
+        }
+        
+        // 关闭统计结果
+        function closeStatistics() {
+            document.getElementById('statisticsModal').style.display = 'none';
+        }
+        
+        // 添加事件监听
+        function addEventListeners() {
+            document.getElementById('name').addEventListener('input', function() {
+                updateProgressBar();
+                checkFormComplete();
+            });
+            
+            document.getElementById('studentId').addEventListener('input', function() {
+                updateProgressBar();
+                checkFormComplete();
+            });
+            
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    updateProgressBar();
+                    checkFormComplete();
+                });
+            });
+            
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateProgressBar();
+                    checkFormComplete();
+                });
+            });
+            
+            document.getElementById('q10').addEventListener('input', function() {
+                updateProgressBar();
+                checkFormComplete();
+            });
+            
+            document.getElementById('submitBtn').addEventListener('click', submitSurvey);
+            document.getElementById('exportBtn').addEventListener('click', exportToExcel);
+            document.getElementById('statisticsBtn').addEventListener('click', showStatistics);
+            document.getElementById('closeModal').addEventListener('click', closeStatistics);
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            addEventListeners();
+            updateProgressBar();
+            checkFormComplete();
+        });
+    </script>
+</body>
+</html>
